@@ -1,17 +1,18 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Base;
 using Sycade.IeAutomation.Contracts;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sycade.IeAutomation.Elements
 {
     [TagName("select")]
-    public class HtmlSelect : HtmlElement<HTMLSelectElementClass>
+    public class HtmlSelect : HtmlElement
     {
         public IEnumerable<HtmlOption> Options
         {
-            get { return Element.Cast<IHTMLElement>().Select(ihe => new HtmlOption(Browser, ihe)); }
+            get { return ((IEnumerable)Element).Cast<IHTMLElement>().Select(ihe => new HtmlOption(Browser, ihe)); }
         }
 
         public HtmlSelect(IBrowser browser, IHTMLElement element)

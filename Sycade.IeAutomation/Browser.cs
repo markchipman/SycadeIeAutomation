@@ -14,10 +14,6 @@ namespace Sycade.IeAutomation
         private HTMLDocument _document;
         private bool _documentReady;
 
-        public IntPtr Hwnd
-        {
-            get { return new IntPtr(_ie.HWND); }
-        }
         public bool IsBusy
         {
             get { return _ie.Busy || !_documentReady; }

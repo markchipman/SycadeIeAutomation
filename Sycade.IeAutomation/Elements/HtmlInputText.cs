@@ -4,7 +4,7 @@ using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
-    public class HtmlInputText : HtmlElement<HTMLInputElementClass>
+    public class HtmlInputText : HtmlElement
     {
         public string Value
         {

@@ -5,7 +5,7 @@ using Sycade.IeAutomation.Contracts;
 namespace Sycade.IeAutomation.Elements
 {
     [TagName("td")]
-    public class HtmlTableCell : HtmlElement<HTMLTableCellClass>
+    public class HtmlTableCell : HtmlElement
     {
         public HtmlTableCell(IBrowser browser, IHTMLElement element)
             : base(browser, element) { }

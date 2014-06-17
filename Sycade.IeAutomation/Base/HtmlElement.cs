@@ -1,19 +1,16 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Contracts;
+using System.Threading;
 
 namespace Sycade.IeAutomation.Base
 {
     public abstract class HtmlElement
     {
+        protected internal dynamic Element { get; set; }
+
         public IBrowser Browser { get; protected set; }
 
         public bool IsValid { get; protected set; }
-    }
-
-    public abstract class HtmlElement<TElement> : HtmlElement
-        where TElement : class, IHTMLElement
-    {
-        protected internal TElement Element { get; set; }
 
         public string InnerHtml
         {
@@ -30,7 +27,7 @@ namespace Sycade.IeAutomation.Base
         {
             Browser = browser;
 
-            Element = element as TElement;
+            Element = (dynamic)element;
 
             IsValid = Element != null;
         }
@@ -38,6 +35,7 @@ namespace Sycade.IeAutomation.Base
 
         public void Click()
         {
+            Element.focus();
             Element.click();
         }
     }

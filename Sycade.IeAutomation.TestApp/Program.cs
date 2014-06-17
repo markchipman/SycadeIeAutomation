@@ -18,31 +18,21 @@ namespace Sycade.IeAutomation.TestApp
             Go();
         }
 
-        [DllImport("user32.dll")]
-        public static extern bool UpdateWindow(IntPtr hWnd);
-
         public static void Go()
         {
             var browser = new Browser(true);
-            //browser.DocumentCompleted += OnDocumentCompleted;
-
-            browser.Navigate("http://google.nl");
+            browser.Navigate("http://www.w3schools.com/html/html_tables.asp");
 
             while (browser.IsBusy) ;
 
             Console.WriteLine("ODC");
 
+            var selects = browser.GetElements<HtmlTable>();
+
             browser.GetElementById<HtmlInputText>("gbqfq").Value = "TestTest";
-            //browser.GetElementById<HtmlButton>("gbqfba").Click();
+            browser.GetElementById<HtmlButton>("gbqfba").Click();
 
             Console.WriteLine("ODC done");
-
-            UpdateWindow(browser.Hwnd);
-        }
-
-        static void OnDocumentCompleted(IBrowser browser)
-        {
-            //browser.DocumentCompleted -= OnDocumentCompleted;
 
             
         }
