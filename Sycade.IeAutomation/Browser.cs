@@ -51,7 +51,7 @@ namespace Sycade.IeAutomation
             where TElement : HtmlElement
         {
             // Get tag name from attribute
-            var tagNameAttr = typeof(TElement).GetCustomAttributes(false).Cast<TagNameAttribute>().SingleOrDefault();
+            var tagNameAttr = typeof(TElement).GetCustomAttributes(false).Cast<TagAttribute>().SingleOrDefault();
 
             if (tagNameAttr == null)
                 throw new ArgumentException("No tag name declared for the specified element type.", "TElement");

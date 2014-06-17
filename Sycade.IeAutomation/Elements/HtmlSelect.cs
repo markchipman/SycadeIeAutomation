@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Sycade.IeAutomation.Elements
 {
-    [TagName("select")]
+    [Tag("select")]
     public class HtmlSelect : HtmlElement
     {
         public IEnumerable<HtmlOption> Options

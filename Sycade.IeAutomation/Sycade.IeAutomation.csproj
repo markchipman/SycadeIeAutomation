@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\TagNameAttribute.cs" />
+    <Compile Include="Base\TagAttribute.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Contracts\IBrowser.cs" />
     <Compile Include="Elements\HtmlButton.cs" />

@@ -4,7 +4,7 @@ using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
-    [TagName("option")]
+    [Tag("option")]
     public class HtmlOption : HtmlElement
     {
         public string Value

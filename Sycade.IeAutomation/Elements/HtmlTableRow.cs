@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Sycade.IeAutomation.Elements
 {
-    [TagName("tr")]
+    [Tag("tr")]
     public class HtmlTableRow : HtmlElement
     {
         public IEnumerable<HtmlTableCell> Cells

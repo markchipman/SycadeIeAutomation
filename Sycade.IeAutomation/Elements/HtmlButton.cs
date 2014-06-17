@@ -4,7 +4,7 @@ using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
-    [TagName("button")]
+    [Tag("button")]
     public class HtmlButton : HtmlElement
     {
         public HtmlButton(IBrowser browser, IHTMLElement element)
