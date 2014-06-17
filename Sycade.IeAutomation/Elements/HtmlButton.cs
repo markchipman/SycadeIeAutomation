@@ -1,11 +1,13 @@
 ﻿using mshtml;
-using Sycade.IeAutomation.Elements.Base;
+using Sycade.IeAutomation.Base;
+using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
+    [TagName("button")]
     public class HtmlButton : HtmlElement<HTMLButtonElementClass>
     {
-        public HtmlButton(IHTMLElement element)
-            : base(element) { }
+        public HtmlButton(IBrowser browser, IHTMLElement element)
+            : base(browser, element) { }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using mshtml;
+using Sycade.IeAutomation.Contracts;
 
-namespace Sycade.IeAutomation.Elements.Base
+namespace Sycade.IeAutomation.Base
 {
     public abstract class HtmlElement
     {
+        public IBrowser Browser { get; protected set; }
+
         public bool IsValid { get; protected set; }
     }
 
@@ -23,8 +26,10 @@ namespace Sycade.IeAutomation.Elements.Base
             set { Element.innerText = value; }
         }
 
-        public HtmlElement(IHTMLElement element)
+        public HtmlElement(IBrowser browser, IHTMLElement element)
         {
+            Browser = browser;
+
             Element = element as TElement;
 
             IsValid = Element != null;

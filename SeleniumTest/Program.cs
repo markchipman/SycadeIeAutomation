@@ -11,7 +11,7 @@ namespace SeleniumTest
 {
     public class Program
     {
-        public const string PpmcBaseUrl = "https://ppmc.hosting.corp/ifg/pm/";
+        
 
         private Browser _browser;
 
@@ -22,12 +22,7 @@ namespace SeleniumTest
 
         public void Go()
         {
-            _browser.Navigate("http://www.bing.com/");
-            _browser.Visible = true;
 
-            _browser.GetElementById<HtmlInputButton>("sb_form_go");
-
-            _browser.Dispose();
         }
 
         static void Main(string[] args)

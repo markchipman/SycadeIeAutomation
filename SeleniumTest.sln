@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTest", "SeleniumTest\SeleniumTest.csproj", "{B5465EC8-8C27-484D-A909-3704C74A8EC0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sycade.IeAutomation", "Sycade.IeAutomation\Sycade.IeAutomation.csproj", "{E0312A64-BB52-4123-AE51-5555B5298F4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sycade.IeAutomation.Test", "Sycade.IeAutomation.Test\Sycade.IeAutomation.Test.csproj", "{849C3093-88CE-4324-855B-BF3E536C817F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sycade.IeAutomation.TestApp", "Sycade.IeAutomation.TestApp\Sycade.IeAutomation.TestApp.csproj", "{3342AB6D-D797-4247-B071-886EFA00AD6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B5465EC8-8C27-484D-A909-3704C74A8EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5465EC8-8C27-484D-A909-3704C74A8EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5465EC8-8C27-484D-A909-3704C74A8EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5465EC8-8C27-484D-A909-3704C74A8EC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E0312A64-BB52-4123-AE51-5555B5298F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0312A64-BB52-4123-AE51-5555B5298F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0312A64-BB52-4123-AE51-5555B5298F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0312A64-BB52-4123-AE51-5555B5298F4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849C3093-88CE-4324-855B-BF3E536C817F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849C3093-88CE-4324-855B-BF3E536C817F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849C3093-88CE-4324-855B-BF3E536C817F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849C3093-88CE-4324-855B-BF3E536C817F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3342AB6D-D797-4247-B071-886EFA00AD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3342AB6D-D797-4247-B071-886EFA00AD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3342AB6D-D797-4247-B071-886EFA00AD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3342AB6D-D797-4247-B071-886EFA00AD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

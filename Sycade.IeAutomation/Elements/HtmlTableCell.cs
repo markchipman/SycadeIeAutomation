@@ -1,11 +1,13 @@
 ﻿using mshtml;
-using Sycade.IeAutomation.Elements.Base;
+using Sycade.IeAutomation.Base;
+using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
+    [TagName("td")]
     public class HtmlTableCell : HtmlElement<HTMLTableCellClass>
     {
-        public HtmlTableCell(IHTMLElement element)
-            : base(element) { }
+        public HtmlTableCell(IBrowser browser, IHTMLElement element)
+            : base(browser, element) { }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using mshtml;
-using Sycade.IeAutomation.Elements.Base;
+using Sycade.IeAutomation.Base;
+using Sycade.IeAutomation.Contracts;
 
 namespace Sycade.IeAutomation.Elements
 {
-    public class HtmlInputText : HtmlElement<HTMLInputTextElementClass>
+    public class HtmlInputText : HtmlElement<HTMLInputElementClass>
     {
         public string Value
         {
@@ -11,7 +12,7 @@ namespace Sycade.IeAutomation.Elements
             set { Element.value = value; }
         }
 
-        public HtmlInputText(IHTMLElement element)
-            : base(element) { }
+        public HtmlInputText(IBrowser browser, IHTMLElement element)
+            : base(browser, element) { }
     }
 }
