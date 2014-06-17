@@ -11,9 +11,9 @@ namespace Sycade.IeAutomation.Contracts
 
         void Navigate(string url);
 
-        List<TElement> GetElements<TElement>()
+        IEnumerable<TElement> GetElements<TElement>()
             where TElement : HtmlElement;
-        //List<TElement> GetElementsByName<TElement>(string name)
+        //IEnumerable<TElement> GetElementsByName<TElement>(string name)
         //    where TElement : HtmlElement;
         TElement GetElementById<TElement>(string id)
             where TElement : HtmlElement;

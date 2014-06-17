@@ -11,7 +11,7 @@ namespace Sycade.IeAutomation
     public class Browser : IBrowser
     {
         private InternetExplorer _ie;
-        private HTMLDocument _document;
+        private HTMLDocumentClass _document;
         private bool _documentReady;
 
         public bool IsBusy
@@ -47,31 +47,20 @@ namespace Sycade.IeAutomation
         }
 
 
-        public List<TElement> GetElements<TElement>()
+        public IEnumerable<TElement> GetElements<TElement>()
             where TElement : HtmlElement
         {
             // Get tag name from attribute
             var tagNameAttr = typeof(TElement).GetCustomAttributes(false).Cast<TagNameAttribute>().SingleOrDefault();
 
             if (tagNameAttr == null)
-                throw new InvalidOperationException("No attr on this class");
+                throw new ArgumentException("No tag name declared for the specified element type.", "TElement");
 
             // Get elements from DOM
             var browserElements = _document.getElementsByTagName(tagNameAttr.TagName);
 
-            var elements = new List<TElement>();
-
-            foreach (var browserElement in browserElements)
-            {
-                var element = (TElement)Activator.CreateInstance(typeof(TElement), this, browserElement);
-
-                if (!element.IsValid)
-                    throw new InvalidOperationException("Not valid");
-
-                elements.Add(element);
-            }
-
-            return elements;
+            return browserElements.Cast<IHTMLElement>()
+                                  .Select(ihe => (TElement)Activator.CreateInstance(typeof(TElement), this, ihe));
         }
 
         public TElement GetElementById<TElement>(string id)
@@ -80,20 +69,15 @@ namespace Sycade.IeAutomation
             var browserElement = _document.getElementById(id);
 
             if (browserElement == null)
-                throw new InvalidOperationException("Element not found");
+                return null;
 
-            var element = (TElement)Activator.CreateInstance(typeof(TElement), this, browserElement);
-
-            if (!element.IsValid)
-                throw new InvalidOperationException("Not valid, browserelement is " + Microsoft.VisualBasic.Information.TypeName(browserElement) + " and element is " + typeof(TElement));
-
-            return element;
+            return (TElement)Activator.CreateInstance(typeof(TElement), this, browserElement);
         }
 
 
         private void OnIeDocumentComplete(object pDisp, ref object URL)
         {
-            _document = (HTMLDocument)_ie.Document;
+            _document = (HTMLDocumentClass)_ie.Document;
             _documentReady = true;
         }
     }

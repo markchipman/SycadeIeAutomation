@@ -10,8 +10,6 @@ namespace Sycade.IeAutomation.Base
 
         public IBrowser Browser { get; protected set; }
 
-        public bool IsValid { get; protected set; }
-
         public string InnerHtml
         {
             get { return Element.innerHTML; }
@@ -27,9 +25,7 @@ namespace Sycade.IeAutomation.Base
         {
             Browser = browser;
 
-            Element = (dynamic)element;
-
-            IsValid = Element != null;
+            Element = element;
         }
 
 
