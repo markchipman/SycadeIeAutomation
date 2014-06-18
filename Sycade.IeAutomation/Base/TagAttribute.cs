@@ -5,12 +5,12 @@ namespace Sycade.IeAutomation.Base
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class TagAttribute : Attribute
     {
-        public string TagName { get; protected set; }
+        public string Name { get; protected set; }
         public string InputType { get; protected set; }
 
-        public TagAttribute(string tagName, string inputType = null)
+        public TagAttribute(string name, string inputType = null)
         {
-            TagName = tagName;
+            Name = name;
             InputType = inputType;
         }
     }

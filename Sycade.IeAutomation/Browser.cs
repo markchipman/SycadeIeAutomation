@@ -1,34 +1,31 @@
 ﻿using mshtml;
 using SHDocVw;
-using Sycade.IeAutomation.Base;
 using Sycade.IeAutomation.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Sycade.IeAutomation
 {
     public class Browser : IBrowser
     {
-        private InternetExplorer _ie;
-        private HTMLDocumentClass _document;
-        private bool _documentReady;
+        private IWebBrowser2 _ie;
 
-        public bool IsBusy
-        {
-            get { return _ie.Busy || !_documentReady; }
-        }
+        public IHtmlDocument Document { get; protected set; }
+
+        public bool IsReady { get; protected set; }
         public bool IsVisible
         {
             get { return _ie.Visible; }
             set { _ie.Visible = value; }
         }
 
-        public Browser(bool visible = false)
+        public Browser(bool visible = false, bool mediumIntegrityLevel = false)
         {
-            _ie = new InternetExplorerClass();
+            if (mediumIntegrityLevel)
+                _ie = new InternetExplorerMediumClass();
+            else
+                _ie = new InternetExplorerClass();
 
-            _ie.DocumentComplete += OnIeDocumentComplete;
+            ((DWebBrowserEvents2_Event)_ie).DocumentComplete += OnIeDocumentComplete;
+            ((DWebBrowserEvents2_Event)_ie).BeforeNavigate2 += OnIeBeforeNavigate;
 
             IsVisible = visible;
         }
@@ -41,44 +38,22 @@ namespace Sycade.IeAutomation
 
         public void Navigate(string url)
         {
-            _documentReady = false;
+            IsReady = false;
 
             _ie.Navigate(url);
         }
 
 
-        public IEnumerable<TElement> GetElements<TElement>()
-            where TElement : HtmlElement
-        {
-            // Get tag name from attribute
-            var tagNameAttr = typeof(TElement).GetCustomAttributes(false).Cast<TagAttribute>().SingleOrDefault();
-
-            if (tagNameAttr == null)
-                throw new ArgumentException("No tag name declared for the specified element type.", "TElement");
-
-            // Get elements from DOM
-            var browserElements = _document.getElementsByTagName(tagNameAttr.TagName);
-
-            return browserElements.Cast<IHTMLElement>()
-                                  .Select(ihe => (TElement)Activator.CreateInstance(typeof(TElement), this, ihe));
-        }
-
-        public TElement GetElementById<TElement>(string id)
-            where TElement : HtmlElement
-        {
-            var browserElement = _document.getElementById(id);
-
-            if (browserElement == null)
-                return null;
-
-            return (TElement)Activator.CreateInstance(typeof(TElement), this, browserElement);
-        }
-
-
         private void OnIeDocumentComplete(object pDisp, ref object URL)
         {
-            _document = (HTMLDocumentClass)_ie.Document;
-            _documentReady = true;
+            Document = new HtmlDocument(this, (HTMLDocument)_ie.Document);
+
+            IsReady = true;
+        }
+
+        private void OnIeBeforeNavigate(object pDisp, ref object URL, ref object Flags, ref object TargetFrameName, ref object PostData, ref object Headers, ref bool Cancel)
+        {
+            IsReady = false;
         }
     }
 }

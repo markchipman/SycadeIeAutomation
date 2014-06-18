@@ -43,6 +43,9 @@
     <Compile Include="Base\TagAttribute.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Contracts\IBrowser.cs" />
+    <Compile Include="Contracts\IHtmlDocument.cs" />
+    <Compile Include="Elements\HtmlAnchor.cs" />
+    <Compile Include="HtmlDocument.cs" />
     <Compile Include="Elements\HtmlButton.cs" />
     <Compile Include="Base\HtmlElement.cs" />
     <Compile Include="Elements\HtmlInputButton.cs">
@@ -90,7 +93,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Frameworks\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

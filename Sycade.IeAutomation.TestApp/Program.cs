@@ -20,21 +20,38 @@ namespace Sycade.IeAutomation.TestApp
 
         public static void Go()
         {
-            var browser = new Browser(true);
-            browser.Navigate("http://www.w3schools.com/html/html_tables.asp");
+            //var browser = new Browser(true, true);
+            //browser.Navigate("https://ppmc.hosting.corp/itg/fm/FinancialSummary.do?fsId=248482");
+            var browser = new Browser(true, true);
+            browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
 
-            while (browser.IsBusy) ;
+            while (!browser.IsReady) ;
 
-            Console.WriteLine("ODC");
+            Console.WriteLine("Browser done");
 
-            var selects = browser.GetElements<HtmlTable>();
+            // Navigate to Edit Costs through the button
+            //var editCostsButton = browser.GetElementById<HtmlInputButton>("editForecastActuals");
+            //editCostsButton.Click();
+            var button = browser.Document.GetElementById<HtmlAnchor>("linkje");
+            //button.Click();
 
-            browser.GetElementById<HtmlInputText>("gbqfq").Value = "TestTest";
-            browser.GetElementById<HtmlButton>("gbqfba").Click();
+            //Console.WriteLine("Button clicked");
 
-            Console.WriteLine("ODC done");
+            //while (!browser.IsReady) ;
 
-            
+            //Console.WriteLine("Browser done");
+
+            //var button2 = browser.Document.GetElementById<HtmlButton>("testbtn");
+
+            //Console.WriteLine("Button is null: {0}", button2 == null);
+
+            Console.ReadLine();
+
+            //// Set Fiscal Year to 2016
+            //var fiscalYearSelect = browser.GetElementById<HtmlSelect>("editYearId");
+            //fiscalYearSelect.Select(4);
+
+            //Console.WriteLine("Year selected");
         }
     }
 }
