@@ -1,5 +1,6 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Contracts;
+using System;
 using System.Threading;
 
 namespace Sycade.IeAutomation.Base
@@ -10,6 +11,11 @@ namespace Sycade.IeAutomation.Base
 
         public IBrowser Browser { get; protected set; }
 
+        public bool IsEnabled
+        {
+            get { return !Element.disabled; }
+            set { Element.disabled = !value; }
+        }
         public string InnerHtml
         {
             get { return Element.innerHTML; }
@@ -29,10 +35,32 @@ namespace Sycade.IeAutomation.Base
         }
 
 
+        public void Blur()
+        {
+            Element.blur();
+        }
+
         public void Click()
         {
-            Element.focus();
+            Focus();
             Element.click();
+        }
+
+        public void FireEvent(string eventName)
+        {
+            Element.FireEvent(eventName);
+        }
+
+        public void Focus()
+        {
+            Element.focus();
+        }
+
+
+        public TElement GetChild<TElement>(int index = 0)
+            where TElement : HtmlElement
+        {
+            return (TElement)Activator.CreateInstance(typeof(TElement), Browser, Element.children[index]);
         }
     }
 }

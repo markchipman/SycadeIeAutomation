@@ -10,9 +10,14 @@ namespace Sycade.IeAutomation.Elements
     [Tag("select")]
     public class HtmlSelect : HtmlElement
     {
-        public IEnumerable<HtmlOption> Options
+        public List<HtmlOption> Options
         {
-            get { return ((IEnumerable)Element).Cast<IHTMLElement>().Select(ihe => new HtmlOption(Browser, ihe)); }
+            get { return ((IEnumerable)Element).Cast<IHTMLElement>().Select(ihe => new HtmlOption(Browser, ihe)).ToList(); }
+        }
+        public string Value
+        {
+            get { return Element.value; }
+            set { Element.value = value; }
         }
 
         public HtmlSelect(IBrowser browser, IHTMLElement element)
@@ -22,18 +27,28 @@ namespace Sycade.IeAutomation.Elements
         public void Select(int index)
         {
             Element.selectedIndex = index;
+
+            FireEvent("onchange");
         }
 
         public void Select(HtmlOption option)
         {
             for (int i = 0; i < Options.Count(); i++)
             {
-                if (Options.ElementAt(i).Element == option.Element)
+                if (Options[i].Element == option.Element)
                 {
                     Select(i);
                     return;
                 }
             }
+        }
+
+        public void SelectByValue(string value)
+        {
+            var optionToSelect = Options.SingleOrDefault(o => o.Value == value);
+
+            if (optionToSelect != null)
+                Select(optionToSelect);
         }
     }
 }

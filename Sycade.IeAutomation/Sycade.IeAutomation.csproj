@@ -44,6 +44,7 @@
     <Compile Include="Browser.cs" />
     <Compile Include="Contracts\IBrowser.cs" />
     <Compile Include="Contracts\IHtmlDocument.cs" />
+    <Compile Include="Contracts\IHtmlElementFactory.cs" />
     <Compile Include="Elements\HtmlAnchor.cs" />
     <Compile Include="HtmlDocument.cs" />
     <Compile Include="Elements\HtmlButton.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Elements\HtmlTableRow.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HtmlElementFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

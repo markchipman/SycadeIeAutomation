@@ -10,9 +10,9 @@ namespace Sycade.IeAutomation.Elements
     [Tag("tr")]
     public class HtmlTableRow : HtmlElement
     {
-        public IEnumerable<HtmlTableCell> Cells
+        public List<HtmlTableCell> Cells
         {
-            get { return ((IEnumerable)Element.cells).Cast<IHTMLElement>().Select(ihe => new HtmlTableCell(Browser, ihe)); }
+            get { return ((IEnumerable)Element.cells).Cast<IHTMLElement>().Select(ihe => new HtmlTableCell(Browser, ihe)).ToList(); }
         }
 
         public HtmlTableRow(IBrowser browser, IHTMLElement element)

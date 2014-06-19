@@ -1,13 +1,7 @@
-﻿using Sycade.IeAutomation.Contracts;
-using Sycade.IeAutomation.Elements;
+﻿using Sycade.IeAutomation.Elements;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Sycade.IeAutomation.TestApp
 {
@@ -15,43 +9,68 @@ namespace Sycade.IeAutomation.TestApp
     {
         static void Main(string[] args)
         {
-            Go();
+            //Go();
+            GoLocal();
         }
 
-        public static void Go()
+        public static void GoLocal()
         {
-            //var browser = new Browser(true, true);
-            //browser.Navigate("https://ppmc.hosting.corp/itg/fm/FinancialSummary.do?fsId=248482");
             var browser = new Browser(true, true);
             browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
 
             while (!browser.IsReady) ;
 
-            Console.WriteLine("Browser done");
+            var select = browser.Document.GetElementById<HtmlSelect>("testSelect");
 
-            // Navigate to Edit Costs through the button
-            //var editCostsButton = browser.GetElementById<HtmlInputButton>("editForecastActuals");
-            //editCostsButton.Click();
-            var button = browser.Document.GetElementById<HtmlAnchor>("linkje");
-            //button.Click();
-
-            //Console.WriteLine("Button clicked");
-
-            //while (!browser.IsReady) ;
-
-            //Console.WriteLine("Browser done");
-
-            //var button2 = browser.Document.GetElementById<HtmlButton>("testbtn");
-
-            //Console.WriteLine("Button is null: {0}", button2 == null);
+            while (!select.IsEnabled) ;
 
             Console.ReadLine();
+        }
 
-            //// Set Fiscal Year to 2016
-            //var fiscalYearSelect = browser.GetElementById<HtmlSelect>("editYearId");
-            //fiscalYearSelect.Select(4);
+        public static int GetFinancialSummaryIdByProjectId(int projectId)
+        {
+            var browser = new Browser(true, true);
+            browser.Navigate("");
 
-            //Console.WriteLine("Year selected");
+            while (!browser.IsReady) ;
+
+            return 0;
+        }
+
+        public static void Go()
+        {
+            // Navigate to Financial Summary
+            var browser = new Browser(true, true);
+            browser.Navigate("https://ppmc.hosting.corp/itg/fm/FinancialSummary.do?fsId=248482");
+
+            while (!browser.IsReady) ;
+
+            // Navigate to Edit Costs through the button
+            var editCostsButton = browser.Document.GetElementById<HtmlInputButton>("editForecastActuals");
+            editCostsButton.Click();
+
+            while (!browser.IsReady) ;
+
+            // Set Fiscal Year to 2016
+            var fiscalYearSelect = browser.Document.GetElementById<HtmlSelect>("editYearId");
+            var yearOption = fiscalYearSelect.Options.SingleOrDefault(o => o.InnerText == "2016");
+
+            fiscalYearSelect.Select(yearOption);
+
+            Thread.Sleep(1250);
+
+            // Fill values into first Cost Line
+            var forecastTable = browser.Document.GetElementById<HtmlTable>("forecastActualRightTable");
+            var forecastRow = forecastTable.Rows[3]; // First Cost Line
+
+            for (int i = 0; i < 12; i++)
+            {
+                forecastRow.Cells[i].Click();
+                forecastRow.Cells[i].GetChild<HtmlInputText>().Value = i.ToString();
+            }
+
+            // Click Save
+            browser.Document.GetElementById<HtmlInputButton>("save.button.footer").Click();
         }
     }
 }

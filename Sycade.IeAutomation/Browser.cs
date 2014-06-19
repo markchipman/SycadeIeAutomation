@@ -7,10 +7,20 @@ namespace Sycade.IeAutomation
     public class Browser : IBrowser
     {
         private IWebBrowser2 _ie;
+        private bool _isReady;
 
         public IHtmlDocument Document { get; protected set; }
 
-        public bool IsReady { get; protected set; }
+        public bool IsReady
+        {
+            get
+            {
+                var readyState = _ie.ReadyState == tagREADYSTATE.READYSTATE_COMPLETE;
+
+                return _isReady && readyState;
+            }
+            set { _isReady = value; }
+        }
         public bool IsVisible
         {
             get { return _ie.Visible; }
