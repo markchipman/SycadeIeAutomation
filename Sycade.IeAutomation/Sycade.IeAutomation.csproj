@@ -50,10 +50,12 @@
     <Compile Include="Contracts\IBrowser.cs" />
     <Compile Include="Contracts\IDomDocument.cs" />
     <Compile Include="Contracts\IHtmlElementFactory.cs" />
+    <Compile Include="Contracts\ISelectorQueryable.cs" />
     <Compile Include="Elements\HtmlAnchor.cs" />
     <Compile Include="DomDocument.cs" />
     <Compile Include="Elements\HtmlButton.cs" />
     <Compile Include="Base\HtmlElement.cs" />
+    <Compile Include="Elements\HtmlInput.cs" />
     <Compile Include="Elements\HtmlInputButton.cs">
       <SubType>Code</SubType>
     </Compile>

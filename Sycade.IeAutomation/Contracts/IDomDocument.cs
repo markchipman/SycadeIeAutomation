@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sycade.IeAutomation.Contracts
 {
-    public interface IDomDocument
+    public interface IDomDocument : ISelectorQueryable
     {
         TElement GetElementById<TElement>(string id)
             where TElement : HtmlElement;
@@ -11,9 +11,6 @@ namespace Sycade.IeAutomation.Contracts
         IEnumerable<TElement> GetElements<TElement>()
             where TElement : HtmlElement;
         IEnumerable<TElement> GetElementsByName<TElement>(string name)
-            where TElement : HtmlElement;
-
-        IEnumerable<TElement> QueryElements<TElement>(string query)
             where TElement : HtmlElement;
     }
 }

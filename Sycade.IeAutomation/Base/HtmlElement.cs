@@ -1,9 +1,10 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Contracts;
+using System.Collections.Generic;
 
 namespace Sycade.IeAutomation.Base
 {
-    public abstract class HtmlElement
+    public abstract class HtmlElement : ISelectorQueryable
     {
         protected internal dynamic Element { get; set; }
         protected IHtmlElementFactory HtmlElementFactory { get; set; }
@@ -57,6 +58,12 @@ namespace Sycade.IeAutomation.Base
             where TElement : HtmlElement
         {
             return HtmlElementFactory.CreateHtmlElement<TElement>(Element.children[index]);
+        }
+
+        public IEnumerable<TElement> QueryElements<TElement>(string query)
+            where TElement : HtmlElement
+        {
+            return HtmlElementFactory.CreateHtmlElements<TElement>(Element.querySelectorAll(query));
         }
     }
 }

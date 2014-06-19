@@ -1,4 +1,5 @@
-﻿using Sycade.IeAutomation.Elements;
+﻿using Sycade.IeAutomation.Contracts;
+using Sycade.IeAutomation.Elements;
 using System;
 using System.Linq;
 using System.Threading;
@@ -15,13 +16,17 @@ namespace Sycade.IeAutomation.TestApp
 
         public static void GoLocal()
         {
-            var browser = new Browser(true, true);
+            IBrowser browser = new Browser(true, true);
             browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
+
+            while (!browser.IsReady) ;
+
+            var text = browser.Document.GetElements<HtmlInputButton>();
         }
 
         public static int GetFinancialSummaryIdByProjectId(int projectId)
         {
-            var browser = new Browser(true, true);
+            IBrowser browser = new Browser(true, true);
             browser.Navigate("");
 
             while (!browser.IsReady) ;

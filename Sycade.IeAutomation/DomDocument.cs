@@ -35,7 +35,6 @@ namespace Sycade.IeAutomation
             return _htmlElementFactory.CreateHtmlElement<TElement>(browserElement);
         }
 
-
         public IEnumerable<TElement> GetElements<TElement>()
             where TElement : HtmlElement
         {
@@ -57,7 +56,6 @@ namespace Sycade.IeAutomation
         {
             return _htmlElementFactory.CreateHtmlElements<TElement>(_document.getElementsByName(name));
         }
-
 
         public IEnumerable<TElement> QueryElements<TElement>(string query)
             where TElement : HtmlElement

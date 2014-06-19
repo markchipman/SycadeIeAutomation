@@ -5,7 +5,7 @@ using Sycade.IeAutomation.Contracts;
 namespace Sycade.IeAutomation.Elements
 {
     [Tag("input", "button")]
-    public class HtmlInputButton : HtmlElement
+    public class HtmlInputButton : HtmlInput
     {
         public HtmlInputButton(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
             : base(element, htmlElementFactory) { }
