@@ -7,7 +7,7 @@ namespace Sycade.IeAutomation.Elements
     [Tag("input", "button")]
     public class HtmlInputButton : HtmlElement
     {
-        public HtmlInputButton(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlInputButton(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

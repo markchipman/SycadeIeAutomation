@@ -1,21 +1,13 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Contracts;
-using System;
-using System.Threading;
 
 namespace Sycade.IeAutomation.Base
 {
     public abstract class HtmlElement
     {
         protected internal dynamic Element { get; set; }
-
-        public IBrowser Browser { get; protected set; }
-
-        public bool IsEnabled
-        {
-            get { return !Element.disabled; }
-            set { Element.disabled = !value; }
-        }
+        protected IHtmlElementFactory HtmlElementFactory { get; set; }
+        
         public string InnerHtml
         {
             get { return Element.innerHTML; }
@@ -26,12 +18,16 @@ namespace Sycade.IeAutomation.Base
             get { return Element.innerText; }
             set { Element.innerText = value; }
         }
-
-        public HtmlElement(IBrowser browser, IHTMLElement element)
+        public bool IsEnabled
         {
-            Browser = browser;
+            get { return !Element.disabled; }
+            set { Element.disabled = !value; }
+        }        
 
+        public HtmlElement(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+        {
             Element = element;
+            HtmlElementFactory = htmlElementFactory;
         }
 
 
@@ -60,7 +56,7 @@ namespace Sycade.IeAutomation.Base
         public TElement GetChild<TElement>(int index = 0)
             where TElement : HtmlElement
         {
-            return (TElement)Activator.CreateInstance(typeof(TElement), Browser, Element.children[index]);
+            return HtmlElementFactory.CreateHtmlElement<TElement>(Element.children[index]);
         }
     }
 }

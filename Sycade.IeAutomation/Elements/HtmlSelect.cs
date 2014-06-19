@@ -1,7 +1,6 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Base;
 using Sycade.IeAutomation.Contracts;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +11,7 @@ namespace Sycade.IeAutomation.Elements
     {
         public List<HtmlOption> Options
         {
-            get { return ((IEnumerable)Element).Cast<IHTMLElement>().Select(ihe => new HtmlOption(Browser, ihe)).ToList(); }
+            get { return HtmlElementFactory.CreateHtmlElements<HtmlOption>(Element); }
         }
         public string Value
         {
@@ -20,8 +19,8 @@ namespace Sycade.IeAutomation.Elements
             set { Element.value = value; }
         }
 
-        public HtmlSelect(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlSelect(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
 
 
         public void Select(int index)

@@ -7,7 +7,7 @@ namespace Sycade.IeAutomation.Elements
     [Tag("input", "submit")]
     public class HtmlInputSubmit : HtmlElement
     {
-        public HtmlInputSubmit(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlInputSubmit(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

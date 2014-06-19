@@ -17,14 +17,6 @@ namespace Sycade.IeAutomation.TestApp
         {
             var browser = new Browser(true, true);
             browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
-
-            while (!browser.IsReady) ;
-
-            var select = browser.Document.GetElementById<HtmlSelect>("testSelect");
-
-            while (!select.IsEnabled) ;
-
-            Console.ReadLine();
         }
 
         public static int GetFinancialSummaryIdByProjectId(int projectId)

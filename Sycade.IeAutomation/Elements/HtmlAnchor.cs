@@ -13,7 +13,7 @@ namespace Sycade.IeAutomation.Elements
             set { Element.href = value; }
         }
 
-        public HtmlAnchor(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlAnchor(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Base;
 using Sycade.IeAutomation.Contracts;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Sycade.IeAutomation.Elements
 {
@@ -12,10 +10,10 @@ namespace Sycade.IeAutomation.Elements
     {
         public List<HtmlTableCell> Cells
         {
-            get { return ((IEnumerable)Element.cells).Cast<IHTMLElement>().Select(ihe => new HtmlTableCell(Browser, ihe)).ToList(); }
+            get { return HtmlElementFactory.CreateHtmlElements<HtmlOption>(Element.cells); }
         }
 
-        public HtmlTableRow(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlTableRow(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

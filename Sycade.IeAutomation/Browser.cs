@@ -9,7 +9,7 @@ namespace Sycade.IeAutomation
         private IWebBrowser2 _ie;
         private bool _isReady;
 
-        public IHtmlDocument Document { get; protected set; }
+        public IDomDocument Document { get; protected set; }
 
         public bool IsReady
         {
@@ -56,7 +56,7 @@ namespace Sycade.IeAutomation
 
         private void OnIeDocumentComplete(object pDisp, ref object URL)
         {
-            Document = new HtmlDocument(this, (HTMLDocument)_ie.Document);
+            Document = new DomDocument((HTMLDocument)_ie.Document, this);
 
             IsReady = true;
         }

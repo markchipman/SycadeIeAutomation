@@ -1,12 +1,10 @@
-﻿using Sycade.IeAutomation.Base;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Sycade.IeAutomation.Contracts
 {
     public interface IBrowser : IDisposable
     {
-        IHtmlDocument Document { get; }
+        IDomDocument Document { get; }
 
         bool IsReady { get; }
         bool IsVisible { get; set; }

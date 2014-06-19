@@ -7,7 +7,7 @@ namespace Sycade.IeAutomation.Elements
     [Tag("button")]
     public class HtmlButton : HtmlElement
     {
-        public HtmlButton(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlButton(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

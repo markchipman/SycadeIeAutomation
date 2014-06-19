@@ -13,7 +13,7 @@ namespace Sycade.IeAutomation.Elements
             set { Element.value = value; }
         }
 
-        public HtmlInputText(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlInputText(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

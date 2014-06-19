@@ -7,7 +7,7 @@ namespace Sycade.IeAutomation.Elements
     [Tag("td")]
     public class HtmlTableCell : HtmlElement
     {
-        public HtmlTableCell(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlTableCell(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }

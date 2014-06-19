@@ -13,7 +13,7 @@ namespace Sycade.IeAutomation.Elements
             set { Element.value = value; }
         }
 
-        public HtmlOption(IBrowser browser, IHTMLElement element)
-            : base(browser, element) { }
+        public HtmlOption(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
+            : base(element, htmlElementFactory) { }
     }
 }
