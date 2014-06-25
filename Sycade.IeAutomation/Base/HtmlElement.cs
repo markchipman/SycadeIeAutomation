@@ -1,14 +1,17 @@
 ﻿using mshtml;
 using Sycade.IeAutomation.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sycade.IeAutomation.Base
 {
-    public abstract class HtmlElement : ISelectorQueryable
+    public class HtmlElement : ISelectorQueryable
     {
         protected internal dynamic Element { get; set; }
         protected IHtmlElementFactory HtmlElementFactory { get; set; }
-        
+
+        public HtmlAttributeCollection Attributes { get; protected set; }
+
         public string InnerHtml
         {
             get { return Element.innerHTML; }
@@ -23,12 +26,14 @@ namespace Sycade.IeAutomation.Base
         {
             get { return !Element.disabled; }
             set { Element.disabled = !value; }
-        }        
+        }
 
         public HtmlElement(IHTMLElement element, IHtmlElementFactory htmlElementFactory)
         {
             Element = element;
             HtmlElementFactory = htmlElementFactory;
+
+            Attributes = new HtmlAttributeCollection(Element);
         }
 
 

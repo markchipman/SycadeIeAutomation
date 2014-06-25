@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\HtmlAttributeCollection.cs" />
     <Compile Include="Base\TagAttribute.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Contracts\IBrowser.cs" />

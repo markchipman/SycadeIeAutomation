@@ -16,10 +16,11 @@ namespace Sycade.IeAutomation
             return (TElement)Activator.CreateInstance(typeof(TElement), element, this);
         }
 
-        public IEnumerable<TElement> CreateHtmlElements<TElement>(IEnumerable elements)
+        public List<TElement> CreateHtmlElements<TElement>(IEnumerable elements)
             where TElement : HtmlElement
         {
-            return elements.Cast<IHTMLElement>().Select(ihe => CreateHtmlElement<TElement>(ihe));
+            return elements.Cast<IHTMLElement>().Select(ihe => CreateHtmlElement<TElement>(ihe))
+                                                .ToList();
         }
     }
 }

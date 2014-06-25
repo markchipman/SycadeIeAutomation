@@ -22,7 +22,7 @@ namespace Sycade.IeAutomation.Contracts
         /// <typeparam name="TElement">The element type to create.</typeparam>
         /// <param name="elements">The IHTMLElements to instantiate the elements with.</param>
         /// <returns>The elements with the specified type.</returns>
-        IEnumerable<TElement> CreateHtmlElements<TElement>(IEnumerable elements)
+        List<TElement> CreateHtmlElements<TElement>(IEnumerable elements)
             where TElement : HtmlElement;
     }
 }

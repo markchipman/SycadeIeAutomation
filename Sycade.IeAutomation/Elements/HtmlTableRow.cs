@@ -10,7 +10,7 @@ namespace Sycade.IeAutomation.Elements
     {
         public List<HtmlTableCell> Cells
         {
-            get { return HtmlElementFactory.CreateHtmlElements<HtmlOption>(Element.cells); }
+            get { return HtmlElementFactory.CreateHtmlElements<HtmlTableCell>(Element.cells); }
         }
 
         public HtmlTableRow(IHTMLElement element, IHtmlElementFactory htmlElementFactory)

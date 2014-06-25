@@ -1,20 +1,24 @@
-﻿using Sycade.IeAutomation.Contracts;
+﻿using Sycade.IeAutomation.Base;
+using Sycade.IeAutomation.Contracts;
 using Sycade.IeAutomation.Elements;
-using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Sycade.IeAutomation.TestApp
 {
     public class Program
     {
+        const string PpmcBaseUrl = "https://ppmc.hosting.corp/";
+
         static void Main(string[] args)
         {
-            //Go();
-            GoLocal();
+            int financialSummaryId = GetFinancialSummaryIdByProjectId(43428); // PMO
+
+            FillForecastValuesForYear(financialSummaryId, 2016, new[] { 1m, 2m, 3m, 4m, 5m, 6m, 7m, 8m, 9m, 10m, 11m, 12m });
         }
 
-        public static void GoLocal()
+        public static void Test()
         {
             IBrowser browser = new Browser(true, true);
             browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
@@ -26,31 +30,46 @@ namespace Sycade.IeAutomation.TestApp
 
         public static int GetFinancialSummaryIdByProjectId(int projectId)
         {
+            // Start browser and open Search Projects page
             IBrowser browser = new Browser(true, true);
-            browser.Navigate("");
+            //browser.Navigate(PpmcBaseUrl + "itg/project/SearchProjects.do");
+            browser.Navigate(@"C:\Users\Michiel\Desktop\test\first.html");
 
             while (!browser.IsReady) ;
 
-            return 0;
+            // Set Project No input to project ID
+            /*browser.Document.GetElementById<HtmlInputText>("PROJECT_REQUEST_ID").Value = projectId.ToString();
+
+            // Click Go
+            browser.Document.GetElementById<HtmlInputButton>("button.go").Click();
+
+            while (!browser.IsReady) ;*/
+
+            // Get Financial Summary anchor
+            var anchor = browser.Document.GetElementById<HtmlElement>("FSFMF_KNTA_FINANCIAL_SUMMARY").GetChild<HtmlAnchor>();
+
+            // Capture fsId from onclick attribute
+            var match = Regex.Match(anchor.Attributes["onclick"], @"FinancialSummary.do\?fsId=(\d+)");
+
+            return int.Parse(match.Groups[1].Value);
         }
 
-        public static void Go()
+        public static void FillForecastValuesForYear(int financialSummaryId, int year, decimal[] values)
         {
             // Navigate to Financial Summary
             var browser = new Browser(true, true);
-            browser.Navigate("https://ppmc.hosting.corp/itg/fm/FinancialSummary.do?fsId=248482");
+            browser.Navigate(PpmcBaseUrl + "itg/fm/FinancialSummary.do?fsId=" + financialSummaryId);
 
             while (!browser.IsReady) ;
 
             // Navigate to Edit Costs through the button
-            var editCostsButton = browser.Document.GetElementById<HtmlInputButton>("editForecastActuals");
-            editCostsButton.Click();
+            browser.Document.GetElementById<HtmlInputButton>("editForecastActuals").Click();
 
             while (!browser.IsReady) ;
 
-            // Set Fiscal Year to 2016
+            // Set Fiscal Year
             var fiscalYearSelect = browser.Document.GetElementById<HtmlSelect>("editYearId");
-            var yearOption = fiscalYearSelect.Options.SingleOrDefault(o => o.InnerText == "2016");
+            var yearOption = fiscalYearSelect.Options.SingleOrDefault(o => o.InnerText == year.ToString());
 
             fiscalYearSelect.Select(yearOption);
 
@@ -63,7 +82,7 @@ namespace Sycade.IeAutomation.TestApp
             for (int i = 0; i < 12; i++)
             {
                 forecastRow.Cells[i].Click();
-                forecastRow.Cells[i].GetChild<HtmlInputText>().Value = i.ToString();
+                forecastRow.Cells[i].GetChild<HtmlInputText>().Value = values[i].ToString();
             }
 
             // Click Save
